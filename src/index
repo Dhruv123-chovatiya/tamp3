@@ -1,0 +1,107 @@
+import React, { useState, useEffect, useRef } from 'react';
+import { Tilt } from 'react-tilt';
+
+const Count = () => {
+    const [isVisible, setIsVisible] = useState(false);
+    const [finishedProjects, setFinishedProjects] = useState(0);
+    const [happyCustomers, setHappyCustomers] = useState(0);
+    const [createdJobs, setCreatedJobs] = useState(0);
+    const [yearsOfExperience, setYearsOfExperience] = useState(0);
+
+    const counters = [
+        { value: finishedProjects, icon: 'finished_projects.png', label: 'Finished Projects' },
+        { value: happyCustomers, icon: 'happy_customers.png', label: 'Happy Customers' },
+        { value: createdJobs, icon: 'created_jobs.png', label: 'Created Jobs' },
+        { value: yearsOfExperience, icon: 'experience.png', label: 'Years Of Experience' },
+    ];
+
+    const countRef = useRef(null);
+
+    useEffect(() => {
+        const targetFinishedProjects = 100;
+        const targetHappyCustomers = 40;
+        const targetCreatedJobs = 50;
+        const targetYearsOfExperience = 5;
+        const duration = 3600000;
+        const incrementFinishedProjects = Math.ceil(targetFinishedProjects / (duration / 100));
+        const incrementHappyCustomers = Math.ceil(targetHappyCustomers / (duration / 100));
+        const incrementCreatedJobs = Math.ceil(targetCreatedJobs / (duration / 100));
+        const incrementYearsOfExperience = Math.ceil(targetYearsOfExperience / (duration / 100));
+
+        const timer = setTimeout(() => {
+            setFinishedProjects(targetFinishedProjects);
+            setHappyCustomers(targetHappyCustomers);
+            setCreatedJobs(targetCreatedJobs);
+            setYearsOfExperience(targetYearsOfExperience);
+        }, duration);
+
+        const options = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.5,
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    setIsVisible(true);
+                }
+            });
+        }, options);
+
+        if (countRef.current) {
+            observer.observe(countRef.current);
+        }
+
+        const interval = setInterval(() => {
+            if (isVisible) {
+                setFinishedProjects((prevValue) => {
+                    const newValue = prevValue + incrementFinishedProjects;
+                    return newValue <= targetFinishedProjects ? newValue : targetFinishedProjects;
+                });
+                setHappyCustomers((prevValue) => {
+                    const newValue = prevValue + incrementHappyCustomers;
+                    return newValue <= targetHappyCustomers ? newValue : targetHappyCustomers;
+                });
+                setCreatedJobs((prevValue) => {
+                    const newValue = prevValue + incrementCreatedJobs;
+                    return newValue <= targetCreatedJobs ? newValue : targetCreatedJobs;
+                });
+                setYearsOfExperience((prevValue) => {
+                    const newValue = prevValue + incrementYearsOfExperience;
+                    return newValue <= targetYearsOfExperience ? newValue : targetYearsOfExperience;
+                });
+            }
+        }, 10);
+
+        return () => {
+            clearTimeout(timer);
+            clearInterval(interval);
+            observer.disconnect();
+        };
+    }, [isVisible]);
+
+    return (
+        <div id="count-section" ref={countRef}>
+            <div className="relative bg-[url('/public/asset/images/count-bg.jpg')] bg-cover">
+                <div className='backdrop-brightness-[0.40] py-7 px-5'>
+                    <div className='flex justify-center'>
+                        <div className='grid lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-2 grid-cols-1 pt-16 pb-16 gap-8'>
+                            {counters.map((counter, index) => (
+                                <Tilt key={index} options={{ max: 25, scale: 1.02 }}>
+                                    <div className="block max-w-xs p-6 bg-[#0C1738] bg-opacity-50 border border-t-4 border-[#09AFF4] rounded-t-0 rounded-b-md text-center transition-all">
+                                        <img src={`./asset/icons/${counter.icon}`} alt={`count ${index + 1}`} className='mx-auto' />
+                                        <p className='text-white text-3xl font-bold mt-4'>{counter.value}+</p>
+                                        <p className="text-white mt-4 text-lg font-bold card-text">{counter.label}</p>
+                                    </div>
+                                </Tilt>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+export default Count;

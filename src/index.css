@@ -1,13 +1,40 @@
+/* Add this CSS to your existing styles or create a new CSS file */
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.header-container {
+  position: relative;
+  background-color: #fff;
+  padding: 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  z-index: 1;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.header-container.fixed {
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+.h1-huge {
+  padding-bottom: 40px;
+  border-bottom: 10px solid #7259ce;
+  font-family: Montserrat, sans-serif;
+  color: #000;
+  font-size: 80px;
+  line-height: 80px;
+}
+
+.section {
+  height: 100vh;
+}
+
+.section-2 {
+  background-color: #6c2cf5;
+}
+
+.section-3 {
+  background-color: #f52c4c;
 }
