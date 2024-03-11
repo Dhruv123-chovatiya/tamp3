@@ -11,14 +11,8 @@ import Section8 from './all section/Section8';
 const Tamp3 = () => {
 
     return (
-        <div onScroll={(e) => {
-            console.log(e);
-            window.alert('test')
-        }}
-            style={{ width: '100%', height: '100%', overflow: 'auto', display: 'flex', flexDirection: 'column' }}>
-            {/* <div style={{ height: window.innerHeight, width: window.innerWidth, position: 'fixed' }}> */}
+        <div>
             <Section1 />
-            {/* </div> */}
             <Section2 />
             <Section3 />
             <Section4 />
@@ -27,7 +21,7 @@ const Tamp3 = () => {
             <Section7 />
             <Section8 />
         </div>
-    )
-}
+    );
+};
 
-export default Tamp3
+export default Tamp3;

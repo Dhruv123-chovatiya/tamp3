@@ -1,4 +1,4 @@
-/*body {
+body {
   margin: 0;
   overflow-x: hidden;
 }
@@ -14,7 +14,6 @@
 .section-1 {
   background-image: url
     "https://www.freepik.com/free-photo/abstract-textured-backgound_12072956.htm#query=black%20background&position=0&from_view=keyword&track=ais&uuid=fb72d8a7-d4e9-4c48-ac6e-cb44fe8b7b58";
-  
 }
 
 .section-2 {
@@ -45,8 +44,8 @@
   to {
     transform: translateY(50%);
   }
-} */
-/* body,
+}
+body,
 html {
   height: 100%;
   margin: 0;
@@ -61,9 +60,9 @@ html {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-} */
+}
 
-/* .section1 {
+.section1 {
   position: relative;
   overflow: hidden;
 }
@@ -86,5 +85,5 @@ html {
   position: fixed;
   top: 0;
   width: 100%;
-  z-index: 1000; 
-} */
+  z-index: 1000;
+}
